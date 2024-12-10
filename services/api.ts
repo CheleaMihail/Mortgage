@@ -19,6 +19,10 @@ class ApiService {
         },
       };
     }
+    return {
+      status: 404,
+      message: "Endpoint not found",
+    };
   }
 
   // Simulate a POST request

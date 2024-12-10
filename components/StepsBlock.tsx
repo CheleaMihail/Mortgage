@@ -1,28 +1,25 @@
-import { View, Text } from "react-native";
-import React from "react";
-
-import AntDesign from "@expo/vector-icons/AntDesign";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { icons } from "@/constants";
+import { View, Text, Image } from "react-native";
 
 const StepsBlock = () => {
   return (
     <View className="mt-4 gap-3">
       <View className="flex-row items-center gap-3">
-        <AntDesign name="checkcircle" size={28} color="green" />
+        <Image className="w-[32px] h-[32px]" source={icons.approved} />
         <View>
           <Text className="text-gray-500 font-semibold">STEP 1</Text>
           <Text className="font-semibold text-lg">Document Review</Text>
         </View>
       </View>
       <View className="flex-row items-center gap-3">
-        <FontAwesome5 name="stopwatch" size={30} color="#2b6cb0" />
+        <Image className="w-[32px] h-[32px]" source={icons.pending} />
         <View>
           <Text className="text-gray-500 font-semibold">STEP 2</Text>
           <Text className="font-semibold text-lg">Pending Final Approval</Text>
         </View>
       </View>
       <View className="flex-row items-center gap-3">
-        <View className="w-[28px] h-[28px] rounded-full bg-gray-300 items-center justify-center">
+        <View className="w-[32px] h-[32px] rounded-full bg-gray-300 items-center justify-center">
           <Text className="text-xl">3</Text>
         </View>
         <View>

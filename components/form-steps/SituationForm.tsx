@@ -23,25 +23,25 @@ const SituationForm = ({ goToNext }: { goToNext: () => void }) => {
       situation: SituationEnum.PracticingHospitalist,
       title: "Practicing Hospitalist",
       subtitle: "Practicing Hospitalist with W2",
-      image: icons.pharmacyIcon,
+      image: icons.plus,
       id: 1,
     },
     {
       situation: SituationEnum.ExitingResidency,
       title: "Exiting Residency",
-      image: icons.pharmacyIcon,
+      image: icons.condominiumIcon,
       id: 2,
     },
     {
       situation: SituationEnum.ExitingFollowship,
       title: "Exiting Followship",
-      image: icons.pharmacyIcon,
+      image: icons.people,
       id: 3,
     },
     {
       situation: SituationEnum.SelfEmployedClinician,
       title: "Self-employed Clinician",
-      image: icons.pharmacyIcon,
+      image: icons.person,
       id: 4,
     },
   ];
@@ -62,7 +62,7 @@ const SituationForm = ({ goToNext }: { goToNext: () => void }) => {
               imageStyle="h-[32px] w-[32px]"
               containerStyle={`pl-3 h-[60px] border rounded-md gap-4 ${
                 localState.situation === button.situation
-                  ? "border-blue-600"
+                  ? "border-lightBlue"
                   : "border-gray-300"
               }`}
               textStyle="text-[16px]"
@@ -78,8 +78,8 @@ const SituationForm = ({ goToNext }: { goToNext: () => void }) => {
       </ScrollView>
       <CustomButton
         title="Continue"
-        containerStyles="bg-blue-700 w-full py-2 mb-5"
-        textStyles="text-white"
+        containerStyles="bg-lightBlue w-full py-2 mb-5"
+        textStyles="text-white font-semibold"
         handlePress={handleContinue}
       />
     </View>

@@ -17,7 +17,9 @@ const CountryDropdown = ({ selectedCountry, setSelectedCountry }) => {
 
   return (
     <View className="gap-2">
-      <Text className="font-semibold text-gray-500">Country</Text>
+      <Text className="font-semibold text-gray-500">
+        Apt/House # (Optional)
+      </Text>
       <View className="w-full border border-gray-300 rounded-md">
         <Picker
           selectedValue={selectedCountry}

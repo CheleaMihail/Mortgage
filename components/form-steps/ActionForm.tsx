@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { View, Text, TouchableOpacity, Image } from "react-native";
+
 import useFormStep from "@/hooks/useFormStep";
 import { ActionType } from "@/services/types";
 import CustomButton from "../ui/CustomButton";
+import { icons } from "@/constants";
 
 interface ActionFormState {
   actionType: ActionType | null;
@@ -19,13 +20,15 @@ const ActionForm = ({ goToNext }: { goToNext: () => void }) => {
 
   return (
     <View className="px-2 w-full flex-1">
-      <Text className="font-semibold text-2xl">What would you like to do?</Text>
+      <Text className="font-semibold text-2xl">
+        What would you like to do today?
+      </Text>
       <View className="flex-1 flex-row justify-center items-start gap-2 mt-3">
         <TouchableOpacity
-          className={`flex-[50%] min-h-[100px] rounded-[20px] px-4 py-6 ${
+          className={`flex-[50%] min-h-[120px] rounded-[20px] px-4 py-6 border ${
             localState.actionType === ActionType.Buy
-              ? "border-2 border-blue-500"
-              : "border border-gray-400"
+              ? "border-lightBlue"
+              : "border-gray-400"
           }`}
           onPress={() =>
             setLocalState((prevState) => ({
@@ -34,18 +37,14 @@ const ActionForm = ({ goToNext }: { goToNext: () => void }) => {
             }))
           }
         >
-          <MaterialCommunityIcons
-            name="home-plus-outline"
-            size={24}
-            color="#2b6cb0"
-          />
+          <Image source={icons.buyIcon} className="w-[32px] h-[32px]" />
           <Text className="font-semibold">Buy a new home</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          className={`flex-[50%] min-h-[100px] rounded-[20px] px-4 py-6 ${
+          className={`flex-[50%] min-h-[120px] rounded-[20px] px-4 py-6 border ${
             localState.actionType === ActionType.Refinance
-              ? "border-2 border-blue-500"
-              : "border border-gray-400"
+              ? "border-lightBlue"
+              : "border-gray-400"
           }`}
           onPress={() =>
             setLocalState((prevState) => ({
@@ -54,18 +53,14 @@ const ActionForm = ({ goToNext }: { goToNext: () => void }) => {
             }))
           }
         >
-          <MaterialCommunityIcons
-            name="home-plus-outline"
-            size={24}
-            color="#2b6cb0"
-          />
+          <Image source={icons.refinanceIcon} className="w-[32px] h-[32px]" />
           <Text className="font-semibold">Refinance my home loan</Text>
         </TouchableOpacity>
       </View>
       <CustomButton
         title="Continue"
-        containerStyles="bg-blue-700 w-full py-2 mb-5"
-        textStyles="text-white"
+        containerStyles="bg-lightBlue w-full py-2 mb-5"
+        textStyles="text-white font-semibold"
         handlePress={handleContinue}
       />
     </View>

@@ -59,20 +59,20 @@ const BuyForm = ({ goToNext }: { goToNext: () => void }) => {
               sliderValue: Math.round(newValue),
             }))
           } // Update state
-          minimumTrackTintColor="#1E90FF" // Active track color
+          minimumTrackTintColor="#33Cfff" // Active track color
           maximumTrackTintColor="#d3d3d3" // Inactive track color
-          thumbTintColor="#1E90FF" // Slider handle color
+          thumbTintColor="#33Cfff" // Slider handle color
         />
 
         <View className="flex-row justify-between items-center">
-          <Text>0%</Text>
-          <Text>100%</Text>
+          <Text className="text-gray-500">0%</Text>
+          <Text className="text-gray-500">100%</Text>
         </View>
       </ScrollView>
       <CustomButton
         title="Continue"
-        containerStyles="bg-blue-700 w-full py-2 mb-5"
-        textStyles="text-white"
+        containerStyles="bg-lightBlue w-full py-2 mb-5"
+        textStyles="text-white font-semibold"
         handlePress={handleContinue}
       />
     </View>

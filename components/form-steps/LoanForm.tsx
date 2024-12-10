@@ -5,6 +5,7 @@ import NumberInput from "../ui/NumberInput";
 import CustomButton from "@/components/ui/CustomButton";
 import { GlobalContext } from "@/context/GlobalProvider";
 import useFormStep from "@/hooks/useFormStep";
+import { icons } from "@/constants";
 
 interface LoanFormState {
   monthlyPayment: string;
@@ -72,6 +73,8 @@ const LoanForm = ({ goToNext }: { goToNext: () => void }) => {
             label="Monthly Payment"
             value={localState.monthlyPayment}
             onChange={onMonthlyPaymentChange}
+            icon={icons.dollarIcon}
+            iconStyle="h-[16px] w-[16px]"
           />
           <NumberInput
             label="Rate %"
@@ -82,13 +85,15 @@ const LoanForm = ({ goToNext }: { goToNext: () => void }) => {
             label="Reserve Amount"
             value={localState.reserveAmount}
             onChange={onReserveAmountChange}
+            icon={icons.dollarIcon}
+            iconStyle="h-[16px] w-[16px]"
           />
         </View>
       </ScrollView>
       <CustomButton
         title="Continue"
-        containerStyles="bg-blue-700 w-full py-2 mb-5"
-        textStyles="text-white"
+        containerStyles="bg-lightBlue w-full py-2 mb-5"
+        textStyles="text-white font-semibold"
         handlePress={handleContinue}
       />
     </View>

@@ -39,8 +39,8 @@ const GiftFundForm = ({ goToNext }: { goToNext: () => void }) => {
       </ScrollView>
       <CustomButton
         title="Continue"
-        containerStyles="bg-blue-700 w-full py-2 mb-5"
-        textStyles="text-white"
+        containerStyles="bg-lightBlue w-full py-2 mb-5"
+        textStyles="text-white font-semibold"
         handlePress={handleContinue}
       />
     </View>

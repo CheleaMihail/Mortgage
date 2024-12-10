@@ -11,8 +11,15 @@ import { toCamelCase } from "@/services/transformer";
 import MortgageDataBlock from "@/components/MortgageDataBlock";
 import StepsBlock from "@/components/StepsBlock";
 import { IMortgageData } from "@/services/types";
+import { GlobalContext } from "@/context/GlobalProvider";
 
 const Mortage = () => {
+  const context = useContext(GlobalContext);
+  if (!context) {
+    throw new Error("Mortage must be used within a GlobalProvider");
+  }
+  const { setGlobalState } = context;
+
   const [mortgageData, setMortgageData] = useState<IMortgageData | null>(null);
   useEffect(() => {
     const fetchMortgageData = async () => {
@@ -43,14 +50,12 @@ const Mortage = () => {
         >
           <Ionicons name="arrow-back" size={28} color="black" />
         </TouchableOpacity>
-        <View className="flex-row items-center justify-center mb-3">
-          <View className="w-[100px] h-[100px] rounded-full">
-            <Image
-              source={icons.logoIcon}
-              className="w-full h-full rounded-full"
-              resizeMode="cover"
-            />
-          </View>
+        <View className="flex-row items-center justify-center gap-3 mb-3">
+          <Image
+            source={icons.logoIcon}
+            className=" w-[100px] h-[100px] rounded-full"
+            resizeMode="contain"
+          />
           <Text className="text-3xl font-semibold">Mortages</Text>
         </View>
         {!mortgageData ? (
@@ -78,6 +83,3 @@ const Mortage = () => {
 };
 
 export default Mortage;
-function setGlobalState(arg0: (prevState: any) => any) {
-  throw new Error("Function not implemented.");
-}

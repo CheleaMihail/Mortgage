@@ -29,25 +29,25 @@ const PropertyForm = ({ goToNext }: { goToNext: () => void }) => {
     {
       propertyType: PropertyType.TownHome,
       title: "Town home",
-      image: icons.houseIcon,
+      image: icons.townIcon,
       id: 2,
     },
     {
       propertyType: PropertyType.Condominium,
       title: "Condominium",
-      image: icons.houseIcon,
+      image: icons.condominiumIcon,
       id: 3,
     },
     {
       propertyType: PropertyType.Apartment,
       title: "Apartment",
-      image: icons.houseIcon,
+      image: icons.apartmentIcon,
       id: 4,
     },
     {
       propertyType: PropertyType.Other,
       title: "Other 2-4 unit",
-      image: icons.houseIcon,
+      image: icons.buildingIcon,
       id: 5,
     },
   ];
@@ -67,7 +67,7 @@ const PropertyForm = ({ goToNext }: { goToNext: () => void }) => {
               imageStyle="h-[32px] w-[32px]"
               containerStyle={`pl-3 h-[60px] rounded-md gap-4 ${
                 localState.property === button.propertyType
-                  ? "border-blue-600 border-2"
+                  ? "border-lightBlue border-2"
                   : "border-gray-300 border"
               }`}
               textStyle="text-[16px]"
@@ -83,8 +83,8 @@ const PropertyForm = ({ goToNext }: { goToNext: () => void }) => {
       </ScrollView>
       <CustomButton
         title="Continue"
-        containerStyles="bg-blue-700 w-full py-2 mb-5"
-        textStyles="text-white"
+        containerStyles="bg-lightBlue w-full py-2 mb-5"
+        textStyles="text-white font-semibold"
         handlePress={handleContinue}
       />
     </View>

@@ -69,7 +69,7 @@ const MultiStepForm = () => {
   });
 
   return (
-    <SafeAreaView className="bg-white flex-1 px-2">
+    <SafeAreaView className="bg-white flex-1 px-4">
       {index > 0 && (
         <TouchableOpacity className="mb-3" onPress={go_back}>
           <Ionicons name="arrow-back" size={28} color="black" />

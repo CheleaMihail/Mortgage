@@ -10,7 +10,7 @@ const ProgressBar = ({ currentStep, totalSteps }) => {
       <View className="w-full h-2 bg-gray-200 rounded-md overflow-hidden">
         <View
           style={{ width: `${progressPercentage}%` }}
-          className="h-full bg-blue-700"
+          className="h-full bg-lightBlue"
         />
       </View>
     </View>
