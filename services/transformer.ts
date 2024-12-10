@@ -1,16 +1,15 @@
-// transformer.ts
-export const transformToCamelCase = (data: any): any => {
-    if (Array.isArray(data)) {
-      return data.map((item) => transformToCamelCase(item));
-    } else if (typeof data === "object" && data !== null) {
-      return Object.entries(data).reduce((acc, [key, value]) => {
-        const camelKey = key.replace(/_([a-z])/g, (_, letter) =>
-          letter.toUpperCase()
-        );
-        acc[camelKey] = transformToCamelCase(value);
-        return acc;
-      }, {} as any);
-    }
-    return data;
-  };
-  
+export const toCamelCase:any = (obj: Record<string, any>) => {
+  if (Array.isArray(obj)) {
+    return obj.map(toCamelCase);
+  }
+
+  if (obj !== null && typeof obj === "object") {
+    return Object.entries(obj).reduce((acc, [key, value]) => {
+      const camelKey = key.replace(/_([a-z])/g, (_, char) => char.toUpperCase());
+      acc[camelKey] = toCamelCase(value);
+      return acc;
+    }, {} as Record<string, any>);
+  }
+
+  return obj;
+};

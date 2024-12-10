@@ -6,42 +6,27 @@ import { router } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { icons } from "@/constants";
 import CustomButton from "@/components/ui/CustomButton";
-import { GlobalContext } from "@/context/GlobalProvider";
-import { fetchMortgageData } from "@/services/api";
-import { transformToCamelCase } from "@/services/transformer";
-import { IMortgageData } from "@/services/types";
+import ApiService from "@/services/api";
+import { toCamelCase } from "@/services/transformer";
 import MortgageDataBlock from "@/components/MortgageDataBlock";
 import StepsBlock from "@/components/StepsBlock";
+import { IMortgageData } from "@/services/types";
 
 const Mortage = () => {
-  const context = useContext(GlobalContext);
-  if (!context) {
-    throw new Error("MultiStepForm must be used within a GlobalProvider");
-  }
-  const { setGlobalState } = context;
-  const [fetchedData, setFetchedData] = useState<IMortgageData>({
-    loanAmount: 0,
-    ownSituation: "",
-    propertyType: "",
-    purchaseDate: "",
-  });
-
-  const [loading, setLoading] = useState(true);
-
+  const [mortgageData, setMortgageData] = useState<IMortgageData | null>(null);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const serverData = await fetchMortgageData(); // Fetch mock server data
-        const transformedData = transformToCamelCase(serverData); // Transform to camelCase
-        setFetchedData(transformedData);
-      } catch (error) {
-        console.error("Error fetching mortgage data:", error);
-      } finally {
-        setLoading(false); // Stop loading
+    const fetchMortgageData = async () => {
+      const response = await ApiService.get("/mortgage");
+
+      if (response.status === 200) {
+        const transformedData = toCamelCase(response.data);
+        setMortgageData(transformedData as IMortgageData);
+      } else {
+        console.error("Failed to fetch mortgage data:", response.message);
       }
     };
 
-    fetchData();
+    fetchMortgageData();
   }, []);
 
   const returnHome = () => {
@@ -68,11 +53,11 @@ const Mortage = () => {
           </View>
           <Text className="text-3xl font-semibold">Mortages</Text>
         </View>
-        {loading ? (
+        {!mortgageData ? (
           <Text>Loading...</Text>
         ) : (
           <>
-            <MortgageDataBlock data={fetchedData} />
+            <MortgageDataBlock data={mortgageData} />
             <StepsBlock />
           </>
         )}
@@ -93,3 +78,6 @@ const Mortage = () => {
 };
 
 export default Mortage;
+function setGlobalState(arg0: (prevState: any) => any) {
+  throw new Error("Function not implemented.");
+}

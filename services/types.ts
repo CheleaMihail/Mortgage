@@ -1,9 +1,9 @@
-export interface IMortgageData{
-    loanAmount:number,
-    ownSituation:string,
-    propertyType:string,
-    purchaseDate:string
-  }
+export interface IMortgageData {
+  price: number;
+  situation: string;
+  property: string;
+  purchaseDate: string;
+}
 
 export enum ActionType {
     Buy,
