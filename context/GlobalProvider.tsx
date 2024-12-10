@@ -37,7 +37,7 @@ export const GlobalContext = createContext<GlobalContextProps | undefined>(
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [globalState, setGlobalState] = useState<GlobalState>({
-    formStep: 0,
+    formStep: 1,
 
     actionType: null,
 
@@ -56,7 +56,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
     price: "0",
     sliderValue: 0,
 
-    purchaseDate: null,
+    purchaseDate: new Date(),
     giftFunds: "0",
   });
 

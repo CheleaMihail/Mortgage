@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, TouchableOpacity, SafeAreaView } from "react-native";
+import { TouchableOpacity, SafeAreaView } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { GlobalContext } from "@/context/GlobalProvider";
-import ProgressBar from "@/components/ProgressBar";
+import ProgressBar from "@/components/ui/ProgressBar";
 import {
   ActionForm,
   BuyForm,

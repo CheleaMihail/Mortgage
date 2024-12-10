@@ -1,40 +1,27 @@
 import { View, Text, ScrollView } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+
 import NumberInput from "../ui/NumberInput";
 import { icons } from "@/constants";
-import { GlobalContext } from "@/context/GlobalProvider";
-import CustomButton from "../CustomButton";
+import CustomButton from "../ui/CustomButton";
+import useFormStep from "@/hooks/useFormStep";
+
+interface GiftFundFormState {
+  giftFunds: string;
+}
 
 const GiftFundForm = ({ goToNext }: { goToNext: () => void }) => {
-  const context = useContext(GlobalContext);
-  if (!context) {
-    throw new Error("GiftFundForm must be used within a GlobalProvider");
-  }
-  const { globalState, setGlobalState } = context;
+  const { localState, setLocalState, handleContinue } =
+    useFormStep<GiftFundFormState>({
+      initialState: { giftFunds: "0" },
+      validate: (state) => state.giftFunds.trim() !== "",
+      onContinue: () => goToNext(),
+    });
 
-  const [giftFunds, setGiftFunds] = useState("");
-
-  // Initialize local state from global state
-  useEffect(() => {
-    setGiftFunds(globalState.giftFunds || "0");
-  }, []);
-
-  const validateForm = () => {
-    return giftFunds.trim() !== "";
-  };
-
-  const handleContinue = () => {
-    if (!validateForm()) {
-      alert("Please fill out all fields.");
-      return;
-    }
-
-    setGlobalState((prevState: any) => ({
+  const onChange = (value: any) => {
+    setLocalState((prevState) => ({
       ...prevState,
-      giftFunds,
+      giftFunds: value,
     }));
-
-    goToNext();
   };
 
   return (
@@ -44,15 +31,15 @@ const GiftFundForm = ({ goToNext }: { goToNext: () => void }) => {
           Tell us if you have Gift Funds you'd like to use towards your purchase
         </Text>
         <NumberInput
-          value={giftFunds}
-          onChange={setGiftFunds}
+          value={localState.giftFunds}
+          onChange={onChange}
           icon={icons.dollarIcon}
           iconStyle="h-[16px] w-[16px]"
         />
       </ScrollView>
       <CustomButton
         title="Continue"
-        containerStyles="bg-blue-700 w-full py-2 mt-5"
+        containerStyles="bg-blue-700 w-full py-2 mb-5"
         textStyles="text-white"
         handlePress={handleContinue}
       />

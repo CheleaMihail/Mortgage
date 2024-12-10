@@ -5,7 +5,7 @@ import { router } from "expo-router";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { icons } from "@/constants";
-import CustomButton from "@/components/CustomButton";
+import CustomButton from "@/components/ui/CustomButton";
 import { GlobalContext } from "@/context/GlobalProvider";
 import { fetchMortgageData } from "@/services/api";
 import { transformToCamelCase } from "@/services/transformer";

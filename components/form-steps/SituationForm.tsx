@@ -1,37 +1,22 @@
-import { View, Text } from "react-native";
-import React, { useContext } from "react";
-import ChoiceButton from "../ChoiceButton";
+import { View, Text, ScrollView } from "react-native";
+
+import ChoiceButton from "../ui/ChoiceButton";
 import { icons } from "@/constants";
-import { GlobalContext } from "@/context/GlobalProvider";
 import { SituationEnum } from "@/services/types";
-import CustomButton from "../CustomButton";
+import CustomButton from "../ui/CustomButton";
+import useFormStep from "@/hooks/useFormStep";
+
+interface SituationFormState {
+  situation: SituationEnum | null;
+}
 
 const SituationForm = ({ goToNext }: { goToNext: () => void }) => {
-  const context = useContext(GlobalContext);
-  if (!context) {
-    throw new Error("SituationForm must be used within a GlobalProvider");
-  }
-
-  const { globalState, setGlobalState } = context;
-
-  const handleActionSelect = (situation: SituationEnum) => {
-    setGlobalState((prevState) => ({
-      ...prevState,
-      situation: situation,
-    }));
-  };
-
-  const validateForm = () => {
-    return globalState.situation !== null;
-  };
-
-  const handleContinue = () => {
-    if (!validateForm()) {
-      alert("Please fill out all fields.");
-      return;
-    }
-    goToNext();
-  };
+  const { localState, setLocalState, handleContinue } =
+    useFormStep<SituationFormState>({
+      initialState: { situation: null }, // Default situation to null
+      validate: (state) => state.situation !== null, // Ensure a situation is selected
+      onContinue: () => goToNext(),
+    });
 
   const buttonData = [
     {
@@ -63,30 +48,37 @@ const SituationForm = ({ goToNext }: { goToNext: () => void }) => {
 
   return (
     <View className="px-2 w-full flex-1">
-      <Text className="font-semibold text-2xl">
-        Next, tell us a little about your own situation.
-      </Text>
-      <View className="gap-4 mt-3">
-        {buttonData.map((button) => (
-          <ChoiceButton
-            key={button.id}
-            title={button.title}
-            subtitle={button.subtitle}
-            image={button.image}
-            imageStyle="h-[32px] w-[32px]"
-            containerStyle={`pl-3 h-[60px] border rounded-md gap-4 ${
-              globalState.situation === button.situation
-                ? "border-blue-600"
-                : "border-gray-300"
-            }`}
-            textStyle="text-[16px]"
-            onPress={() => handleActionSelect(button.situation)}
-          />
-        ))}
-      </View>
+      <ScrollView>
+        <Text className="font-semibold text-2xl">
+          Next, tell us a little about your own situation.
+        </Text>
+        <View className="gap-4 mt-3">
+          {buttonData.map((button) => (
+            <ChoiceButton
+              key={button.id}
+              title={button.title}
+              subtitle={button.subtitle}
+              image={button.image}
+              imageStyle="h-[32px] w-[32px]"
+              containerStyle={`pl-3 h-[60px] border rounded-md gap-4 ${
+                localState.situation === button.situation
+                  ? "border-blue-600"
+                  : "border-gray-300"
+              }`}
+              textStyle="text-[16px]"
+              onPress={() =>
+                setLocalState((prevState) => ({
+                  ...prevState,
+                  situation: button.situation,
+                }))
+              }
+            />
+          ))}
+        </View>
+      </ScrollView>
       <CustomButton
         title="Continue"
-        containerStyles="bg-blue-700 w-full py-2 mt-5"
+        containerStyles="bg-blue-700 w-full py-2 mb-5"
         textStyles="text-white"
         handlePress={handleContinue}
       />

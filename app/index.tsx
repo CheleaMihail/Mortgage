@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Image, StatusBar } from "react-native";
 import React from "react";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomButton from "@/components/CustomButton";
+import CustomButton from "@/components/ui/CustomButton";
 
 import { images } from "@/constants";
 
