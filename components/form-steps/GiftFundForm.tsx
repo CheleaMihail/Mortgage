@@ -15,6 +15,7 @@ const GiftFundForm = ({ goToNext }: { goToNext: () => void }) => {
       initialState: { giftFunds: "0" },
       validate: (state) => state.giftFunds.trim() !== "",
       onContinue: () => goToNext(),
+      stepKey: "giftFundForm",
     });
 
   const onChange = (value: any) => {

@@ -25,6 +25,7 @@ const LocationForm = ({ goToNext }: { goToNext: () => void }) => {
         state.address.trim() !== "" &&
         state.country !== null,
       onContinue: () => goToNext(),
+      stepKey: "locationForm",
     });
 
   return (

@@ -1,17 +1,18 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "@/context/GlobalProvider";
-import ApiService from "@/services/api";
 
 interface UseFormStepProps<T> {
   initialState: T;
   validate: (state: T) => boolean;
   onContinue: () => void;
+  stepKey: string; // Unique key to store this step's data in global state
 }
 
 const useFormStep = <T extends Record<string, any>>({
   initialState,
   validate,
   onContinue,
+  stepKey,
 }: UseFormStepProps<T>) => {
   const context = useContext(GlobalContext);
   if (!context) {
@@ -19,41 +20,23 @@ const useFormStep = <T extends Record<string, any>>({
   }
 
   const { globalState, setGlobalState } = context;
-  const [localState, setLocalState] = useState<T>(initialState);
 
-  // Submit form to mock API
-  const submitForm = async () => {
-    try {
-      const response = await ApiService.post("/submitForm", globalState); // Send the global state
-      if (response.status === 200) {
-        console.log("Form submission successful:", response.message);
-        console.log("Submitted data:", response.data);
-      } else {
-        console.error("Form submission failed:", response.message);
-      }
-    } catch (error) {
-      console.error("An error occurred during form submission:", error);
-    }
-  };
+  // Initialize local state from global state or fallback to initial state
+  const [localState, setLocalState] = useState<T>(
+    (globalState[stepKey] as T) || initialState
+  );
 
-  // Continue to the next step, save to global state, and submit the form
   const handleContinue = () => {
     if (!validate(localState)) {
       alert("Please fill out all required fields.");
       return;
     }
-
-    // Save local state to global state
-    setGlobalState((prevState: any) => ({
+    //Save current data in global state before continue
+    setGlobalState((prevState) => ({
       ...prevState,
-      ...localState,
+      [stepKey]: localState,
     }));
-
-    // Submit the form data after saving
-    submitForm();
-
-    // Call the onContinue function for next step
-    onContinue();
+    onContinue(); // Proceed to the next step
   };
 
   return {

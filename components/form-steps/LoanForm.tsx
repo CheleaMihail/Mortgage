@@ -29,6 +29,7 @@ const LoanForm = ({ goToNext }: { goToNext: () => void }) => {
         state.reserveAmount.trim() !== "" &&
         state.selectedPeriod !== null,
       onContinue: () => goToNext(),
+      stepKey: "loanForm",
     });
 
   const onPickerChange = (itemValue: any) => {

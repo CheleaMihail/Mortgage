@@ -16,6 +16,7 @@ const SituationForm = ({ goToNext }: { goToNext: () => void }) => {
       initialState: { situation: null }, // Default situation to null
       validate: (state) => state.situation !== null, // Ensure a situation is selected
       onContinue: () => goToNext(),
+      stepKey: "situationForm",
     });
 
   const buttonData = [

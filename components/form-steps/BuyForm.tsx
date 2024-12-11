@@ -13,6 +13,7 @@ const BuyForm = ({ goToNext }: { goToNext: () => void }) => {
     initialState: { price: "0", sliderValue: 0 },
     validate: (state) => state.price.trim() !== "" && state.sliderValue !== 0,
     onContinue: () => goToNext(),
+    stepKey: "buyForm",
   });
 
   return (

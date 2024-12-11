@@ -16,6 +16,7 @@ const DateForm = ({ goToNext }: { goToNext: () => void }) => {
       initialState: { purchaseDate: currentDate }, // Default to current date
       validate: (state) => state.purchaseDate !== null, // Ensure a date is selected
       onContinue: () => goToNext(),
+      stepKey: "dateForm",
     });
   return (
     <View className="px-2 w-full flex-1">

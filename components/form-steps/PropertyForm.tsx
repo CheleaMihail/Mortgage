@@ -17,6 +17,7 @@ const PropertyForm = ({ goToNext }: { goToNext: () => void }) => {
       initialState: { property: null },
       validate: (state) => state.property !== null,
       onContinue: () => goToNext(),
+      stepKey: "propertyForm",
     });
 
   const buttonData = [

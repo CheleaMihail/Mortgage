@@ -16,6 +16,7 @@ const ActionForm = ({ goToNext }: { goToNext: () => void }) => {
       initialState: { actionType: null },
       validate: (state) => state.actionType !== null, // Ensure an action is selected
       onContinue: goToNext,
+      stepKey: "actionForm",
     });
 
   return (
