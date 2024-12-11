@@ -18,7 +18,7 @@ const App = () => {
         <CustomButton
           title="Go to activity"
           handlePress={() => router.push("/MultiStepForm")}
-          containerStyles="bg-blue-700 w-full py-2 mt-7"
+          containerStyles="bg-lightBlue w-full py-2 mt-7"
           textStyles="text-white"
         />
       </View>

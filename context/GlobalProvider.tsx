@@ -37,7 +37,7 @@ export const GlobalContext = createContext<GlobalContextProps | undefined>(
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [globalState, setGlobalState] = useState<GlobalState>({
-    formStep: 7,
+    formStep: 0,
 
     actionType: null,
 
